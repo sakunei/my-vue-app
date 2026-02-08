@@ -1,0 +1,107 @@
+
+@font-face {
+  font-family: 'MyFont'; /* 我们给字体起的代号 */
+  
+  src: url('/fonts/SourceHanSerifSC-Light.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  /* ⭐ 新增：防阻塞，加载慢时先显示备用字体，加载完自动替换 */
+  font-display: swap;
+}
+
+/* 2. 全局变量 (仅定义颜色等) */
+/* ========================================= */
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* 颜色方案 */
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  /* 字体渲染优化 */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ========================================= */
+/* 3. Body 核心样式 (应用字体的地方) */
+/* ========================================= */
+body {
+  margin: 0;
+  display: flex;
+  place-items: flex-start;
+  min-width: 320px;
+  min-height: 100vh;
+  
+  /* ⭐⭐⭐ 核心修改：直接在这里指定字体 ⭐⭐⭐ */
+  /* 将自定义字体 'MyFont' 放在第一位 */
+  font-family: 'MyFont', system-ui, "Microsoft YaHei", sans-serif;
+}
+
+/* ========================================= */
+/* 4. 其他组件样式 */
+/* ========================================= */
+a {
+  font-weight: 500;
+  color: #646cff;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  /* 如果标题想用别的字体，可以在这里单独写，否则继承 body */
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.card {
+  padding: 2em;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+/* ========================================= */
+/* 5. 浅色模式适配 */
+/* ========================================= */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

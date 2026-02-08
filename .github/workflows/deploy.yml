@@ -1,0 +1,54 @@
+# 名字随便起，显示在 Actions 里的
+name: Deploy to GitHub Pages
+
+# 触发条件：当 main 分支有 push 代码时触发
+on:
+  push:
+    branches: [main]
+
+# 设置权限（必须有）
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 任务流程
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. 安装 Node.js 环境
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # 使用较新的 Node 版本
+
+      # 3. 安装项目依赖
+      - name: Install dependencies
+        run: npm install
+
+      # 4. 打包项目 (生成 dist 文件夹)
+      - name: Build
+        run: npm run build
+
+      # 5. 上传构建产物 (dist)
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist # Vite 默认打包路径是 dist
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      # 6. 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
