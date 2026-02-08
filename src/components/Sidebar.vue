@@ -62,7 +62,7 @@ const playlist = [
   { 
     title: 'Lemon', 
     artist: '米津玄师', 
-    cover: '/images/avatar.jpg' 
+    cover: '/my-vue-app/images/avatar.jpg' 
   },
   { 
     title: 'Blue Bird', 

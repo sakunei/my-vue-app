@@ -41,7 +41,7 @@ const posts = [
   {
     id: 3,
     title: '最近在看的四月新番推荐',
-    cover: '/my-vue-app/public/images/小铃.jpg'
+    cover: '/my-vue-app/public/images/kosuzi.jpg'
   },
   {
     id: 4,
